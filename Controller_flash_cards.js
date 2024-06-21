@@ -1,8 +1,7 @@
-const FlashModule = require('./Question');
-const QuizController = require('./QuizController');
-const quizController = new QuizController();
-const QuizView = require('./QuizView');
-const quizView = new QuizView(quizController); // check path, not working !
+const FlashModule = require('./Module_flash_cards');
+const viewFlashCards = require('./View_flash_cards')
+
+
 
 class Controller {
     constructor() {
@@ -11,7 +10,7 @@ class Controller {
 
     loadQuestionsFromFiles(filePaths) {
         filePaths.forEach(filePath => {
-            this.questions.push(...Question.loadQuestions(filePath));
+            this.questions.push(...FlashModule.loadQuestions(filePath));
         });
     }
 
@@ -32,7 +31,12 @@ class Controller {
     }
 }
 
+const quizController = new Controller();
+
+const quizView = new viewFlashCards(quizController);
+
 
 quizView.start();
 
-module.exports = Controller;
+
+
