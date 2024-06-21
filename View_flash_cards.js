@@ -15,7 +15,7 @@ class ViewFlashCards {
             {
                 type: 'input',
                 name: 'name',
-                message: 'Welcome to the Quiz! Please enter your name:'
+                message: 'Добро пожаловать на игру, незнакомец. Представься!:'
             }
         ]);
         this.userName = nameAnswer.name;
@@ -28,7 +28,7 @@ class ViewFlashCards {
         const txtFiles = files.filter(file => path.extname(file) === '.txt');
 
         if (txtFiles.length === 0) {
-            console.log('No quiz files found in the directory.');
+            console.log('Сорян, вопросов больше не имеем.');
             return;
         }
 
@@ -36,7 +36,7 @@ class ViewFlashCards {
             {
                 type: 'list',
                 name: 'category',
-                message: 'Please choose a category:',
+                message: 'Выбери категорию:',
                 choices: txtFiles
             }
         ]);
@@ -49,25 +49,25 @@ class ViewFlashCards {
     askNextQuestion() {
         const question = this.quizController.getQuestion(this.currentQuestionIndex);
         if (question) {
-            console.log(`Question: ${question.question}`);
+            console.log(`Вопрос: ${question.question}`);
             inquirer.prompt([
                 {
                     type: 'input',
                     name: 'answer',
-                    message: 'Your answer:'
+                    message: 'Твой ответ:'
                 }
             ]).then(answer => {
                 if (this.quizController.checkAnswer(this.currentQuestionIndex, answer.answer)) {
-                    console.log('Correct!\n');
+                    console.log('Бинго! Порадовал Беню:)\n');
                     this.score++;
                 } else {
-                    console.log(`Wrong! The correct answer is: ${question.answer}\n`);
+                    console.log(`Уа уа уа уа(грустный трамбон) Беня не доволен!: ${question.answer}\n`);
                 }
                 this.currentQuestionIndex++;
                 this.askNextQuestion();
             });
         } else {
-            console.log(`Quiz finished! ${this.userName}, your score: ${this.score}/${this.quizController.questions.length}`);
+            console.log(`Красава ${this.userName}, ты ответил на ${this.score} из ${this.quizController.questions.length} вопросов, так держать!`);
         }
     }
 }
