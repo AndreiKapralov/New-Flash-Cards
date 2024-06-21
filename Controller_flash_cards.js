@@ -1,4 +1,8 @@
-const Question = require('./Question');
+const FlashModule = require('./Question');
+const QuizController = require('./QuizController');
+const quizController = new QuizController();
+const QuizView = require('./QuizView');
+const quizView = new QuizView(quizController);
 
 class Controller {
     constructor() {
@@ -27,5 +31,8 @@ class Controller {
         }
     }
 }
+
+
+quizView.start();
 
 module.exports = Controller;
