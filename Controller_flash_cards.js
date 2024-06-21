@@ -2,7 +2,7 @@ const FlashModule = require('./Question');
 const QuizController = require('./QuizController');
 const quizController = new QuizController();
 const QuizView = require('./QuizView');
-const quizView = new QuizView(quizController);
+const quizView = new QuizView(quizController); // check path, not working !
 
 class Controller {
     constructor() {
